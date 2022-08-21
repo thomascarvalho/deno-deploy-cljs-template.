@@ -1,0 +1,26 @@
+;; shadow-cljs configuration
+{:deps true
+
+ :builds
+ {:server {:target :esm
+           :runtime :custom
+           :output-dir "dist/server"
+           :modules {:server {:exports {renderPageToString app.server/render}}}}
+
+  :client {:target :browser
+           :output-dir "dist/client"
+           :asset-path "/dist/client"
+           :devtools {:reload-strategy :full
+                      :preloads [app.dev]}
+           :module-loader true
+           :modules {:shared {:entries []}
+                     :client {:init-fn app.client/init!
+                              :entries [app.client]
+                              :depends-on #{:shared}}
+                     :home {:entries [app.pages.home]
+                            :depends-on #{:shared}}
+                     :about {:entries [app.pages.about]
+                             :depends-on #{:shared}}}
+           :module-hash-names true
+           :build-options {:manifest-name "manifest.json"}
+           :compiler-options {:output-feature-set :es6}}}}
