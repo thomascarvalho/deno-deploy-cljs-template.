@@ -30,4 +30,5 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "deno-cljs"
+          exclude: "node_modules"
           entrypoint: "./index.ts"
