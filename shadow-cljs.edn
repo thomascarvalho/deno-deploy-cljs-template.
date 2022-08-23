@@ -1,5 +1,4 @@
-;; shadow-cljs configuration
-{:deps true
+{:source-paths ["src" "test"]
 
  :builds
  {:server {:target :esm
