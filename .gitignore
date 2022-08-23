@@ -1,6 +1,9 @@
 node_modules/
 public/js
 
+.calva/
+dist/
+
 /target
 /checkouts
 /src/gen

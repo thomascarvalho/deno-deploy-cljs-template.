@@ -7,6 +7,11 @@
            :output-dir "dist/server"
            :modules {:server {:exports {renderPageToString app.server/render}}}}
 
+  :api {:target :esm
+        :runtime :custom
+        :output-dir "dist/api"
+        :modules {:api {:exports {routes app.api/entries}}}}
+
   :client {:target :browser
            :output-dir "dist/client"
            :asset-path "/dist/client"
