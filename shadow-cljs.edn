@@ -9,7 +9,7 @@
   :api {:target :esm
         :runtime :custom
         :output-dir "dist/api"
-        :modules {:api {:exports {routes app.api/entries}}}}
+        :modules {:api {:init-fn app.api/init}}}
 
   :client {:target :browser
            :output-dir "dist/client"

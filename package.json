@@ -9,7 +9,7 @@
     "build": "shadow-cljs compile api",
     "release": "shadow-cljs release api",
     "prerelease": "npm run clean",
-    "start": "deno run -A --unstable index.ts"
+    "start": "deno run -A --unstable dist/api/api.js"
   },
   "devDependencies": {
     "shadow-cljs": "2.15.8"
