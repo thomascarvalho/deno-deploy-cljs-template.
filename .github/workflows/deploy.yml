@@ -31,4 +31,4 @@ jobs:
         with:
           project: "deno-cljs"
           exclude: "node_modules"
-          entrypoint: "./index.ts"
+          entrypoint: "./dist/api/api.js"
