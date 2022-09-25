@@ -1,24 +1,7 @@
 (ns app.server
   (:require ["https://deno.land/std@0.157.0/http/server.ts" :refer [serve]]
-            ["https://crux.land/router@0.0.5" :refer [router]]))
-
-;; Utils
-(defn j->c [o] (js->clj o :keywordize-keys true))
-(defn c->j [o] (clj->js o))
-
-(defn clj->json
-  [o]
-  (-> o c->j js/JSON.stringify))
-
-(defn deep-merge
-  "Recursively merges maps. Similar to core's `merge` function."
-  [& maps]
-  (letfn [(m [& xs]
-            (if (some #(and (map? %)
-                            (not (record? %))) xs)
-              (apply merge-with m xs)
-              (last xs)))]
-    (reduce m maps)))
+            ["https://crux.land/router@0.0.5" :refer [router]]
+            [app.util :as u]))
 
 (def default-response-opts
   {:status 200
@@ -28,11 +11,11 @@
   ([payload]
    (response payload default-response-opts))
   ([payload opts]
-   (new js/Response (clj->json payload) (c->j (deep-merge default-response-opts opts)))))
+   (new js/Response (u/clj->json payload) (u/c->j (u/deep-merge default-response-opts opts)))))
 
 (defn ->handler
   [handler req params]
-  (handler req (j->c params)))
+  (handler req (u/j->c params)))
 
 ;; Handler
 
@@ -43,7 +26,7 @@
               {(str (name method) "@" path) #(-> (->handler handler %1 %2)
                                                  response)}))
        (reduce merge)
-       (c->j)))
+       (u/c->j)))
 
 (defn serve-routes
   [routes]
