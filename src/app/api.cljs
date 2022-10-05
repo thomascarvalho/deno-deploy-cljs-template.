@@ -5,7 +5,7 @@
 
 (defn index
   [req] 
-  "/Index")
+  {:message "/Index"})
 
 (defn hello
   [req {:keys [name]}]
